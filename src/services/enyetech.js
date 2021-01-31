@@ -13,14 +13,6 @@ export function data() {
   });
 }
 
-export function datar() {
-  return fetch("data.json").then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    throw new Error(res.statusText);
-  });
-}
 export async function datarr() {
   return {
     records: {
