@@ -3,11 +3,11 @@ const Header = (props) => {
   return (
     <div className="ui top menu">
       {/* <div className="header"> */}
-        <h2 className="item">Hello World</h2>
+        <div className="item"><h2>{props.oneProp}</h2></div>
         <div className="right menu">
           <div className="item">
             <div className="ui icon input">
-              <input type="text" placeholder="Search..." />
+              <input type="text" placeholder="Search..."value={props.search} onChange={(e)=>props.searchSpace(e)}/>
               <i className="search link icon"></i>
             </div>
           </div>

@@ -9,7 +9,7 @@ const Display = (props) => {
   }
   return props.list.map((person, index) => {
     return (
-      <div className=" ui cards" key={person.CreditCardNumber}>
+      <div className=" ui link cards" key={person.CreditCardNumber}>
         <div className="card">
           <div className="ui">
             <div className="header">

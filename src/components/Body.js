@@ -8,23 +8,14 @@ const FILTER_MAP = {
   ALL: () => true,
 };
 
-function App() {
-  const [list, setList] = useState([]);
-  const [filter, setFilter] = useState("All");
-  const [search, searchState] = useState("");
-
-  const oneProp = "Come here";
-
-  function searchSpace(event) {
-    event.preventDefault();
-    searchState(event.target.value);
-  }
+function Body(props) {
+  
   useEffect(() => {
     let mounted = true;
     data()
       .then((items) => {
         if (mounted) {
-          setList(items.records.profiles);
+          props.setList(items.records.profiles);
         }
       })
       .catch((error) => {
@@ -33,7 +24,7 @@ function App() {
     return () => (mounted = false);
   }, []);
 
-  if (!list) {
+  if (!props.list) {
     return (
       <div>
         <div className="ui negative message">
@@ -43,20 +34,19 @@ function App() {
       </div>
     );
   } else {
-    if (search === "") {
+    if (props.search === "") {
       return (
         <div>
-          <div>{header({ oneProp, searchSpace, search })}</div>
           <div className="ui container centered grid">
             <div className="ui row divided grid ">
-            <Display list={list} />
+              <Display list={props.list} />
             </div>
           </div>
         </div>
       );
     } else {
       // eslint-disable-next-line array-callback-return
-      const items = list.filter((item) => {
+      const items = props.list.filter((item) => {
         if (
           item.FirstName.toLowerCase().includes(search.toLocaleLowerCase()) ||
           item.LastName.toLowerCase().includes(search.toLocaleLowerCase())
@@ -67,9 +57,9 @@ function App() {
       return (
         <div>
           <div>{header({ oneProp, searchSpace, search })}</div>
-           <div className="ui container centered grid">
+          <div className="ui container centered grid">
             <div className="ui row divided grid ">
-            <Display list={items} />
+              <Display list={items} />
             </div>
           </div>
         </div>
@@ -77,14 +67,5 @@ function App() {
     }
   }
 }
-function header(props) {
-  return (
-    <header>
-      <div>
-        <Header {...props} />
-      </div>
-    </header>
-  );
-}
 
-export default App;
+export default Body;
