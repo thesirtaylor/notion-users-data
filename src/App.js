@@ -3,18 +3,20 @@ import { data } from "./services/enyetech";
 import "./App.css";
 import Display from "./components/Display";
 import Header from "./components/Header";
-
-const FILTER_MAP = {
-  ALL: () => true,
-};
+import Pagination from "react-js-pagination";
 
 function App() {
   const [list, setList] = useState([]);
-  const [filter, setFilter] = useState("All");
   const [search, searchState] = useState("");
-
+  const perPage = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLast = currentPage * perPage;
+  const indexOfFirst = indexOfLast - perPage;
+  const current = list.slice(indexOfFirst, indexOfLast);
   const oneProp = "Come here";
-
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   function searchSpace(event) {
     event.preventDefault();
     searchState(event.target.value);
@@ -28,7 +30,8 @@ function App() {
         }
       })
       .catch((error) => {
-        document.querySelector("#error").innerHTML = error;
+        // document.getElementById("error").innerHTML = error;
+        console.log(error);
       }); //rewrite for better display
     return () => (mounted = false);
   }, []);
@@ -47,10 +50,19 @@ function App() {
       return (
         <div>
           <div>{header({ oneProp, searchSpace, search })}</div>
-          <div className="ui container centered grid">
-            <div className="ui row divided grid ">
-            <Display list={list} />
-            </div>
+          <div className="before-list">
+            <Pagination
+              className="item"
+              activePage={currentPage}
+              itemsCountPerPage={20}
+              totalItemsCount={list.length}
+              pageRangeDisplayed={20}
+              onChange={handlePageChange}
+              itemClass="page-item"
+            />
+          </div>
+          <div className="ui centered grid container">
+            <Display list={current} />
           </div>
         </div>
       );
@@ -67,10 +79,19 @@ function App() {
       return (
         <div>
           <div>{header({ oneProp, searchSpace, search })}</div>
-           <div className="ui container centered grid">
-            <div className="ui row divided grid ">
+          <div>
+            <Pagination
+              className="item"
+              activePage={currentPage}
+              itemsCountPerPage={20}
+              totalItemsCount={list.length}
+              pageRangeDisplayed={20}
+              onChange={handlePageChange}
+              itemClass="page-item"
+            />
+          </div>
+          <div className="ui centered grid container">
             <Display list={items} />
-            </div>
           </div>
         </div>
       );

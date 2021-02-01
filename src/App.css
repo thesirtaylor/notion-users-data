@@ -6,7 +6,21 @@
   height: 40vmin;
   pointer-events: none;
 }
+.before-list{
+  margin-bottom: 2%;
+  position: relative;
 
+  /* margin-top: 10%; */
+}
+.page-item {
+  position: static;
+  display: inline-block;
+  flex-direction: row;
+  list-style: none;
+  margin-left: 10px;
+  padding: 5px;
+  font-weight: bolder;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -1,9 +1,10 @@
 import React from "react";
 const Display = (props) => {
-  if (!props) {
+  if (Object.entries(props.list).length === 0) {
     return (
       <div>
-        <h1>Loading</h1>
+        <div></div>
+        <h1>{"Loading...."}</h1>
       </div>
     );
   }
