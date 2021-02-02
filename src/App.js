@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { data } from "./services/enyetech";
 import "./App.css";
 import Display from "./components/Display";
@@ -14,7 +14,7 @@ function App() {
   const indexOfLast = currentPage * perPage;
   const indexOfFirst = indexOfLast - perPage;
   const current = list.slice(indexOfFirst, indexOfLast);
-  const oneProp = "Come here";
+  const oneProp = "Users Data";
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -38,26 +38,7 @@ function App() {
         break;
     }
   };
-
-  useEffect(() => {
-    let filtered = current;
-    console.log("first filtered", filtered);
-    if (gender !== "") {
-      filtered = filtered.filter(
-        (persons) => persons.Gender === gender.toLocaleLowerCase()
-      );
-      console.log("filtered", filtered);
-      console.log("gender", gender);
-    }
-    if (paymentMethod !== "") {
-      filtered = filtered.filter(
-        (persons) => persons.PaymentMethod === paymentMethod.toLocaleLowerCase()
-      );
-    }
-    setList(filtered);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[gender, paymentMethod]);
-
+//load data
   useEffect(() => {
     let mounted = true;
     data()
@@ -72,6 +53,32 @@ function App() {
       }); //rewrite for better display
     return () => (mounted = false);
   }, []);
+
+//filter
+    useEffect(() => {
+      let filtered = current;
+      console.log("first filtered", filtered);
+      if (gender !== "") {
+        filtered = filtered.filter(
+          (persons) => persons.Gender === gender.toLocaleLowerCase()
+        );
+        console.log("filtered", filtered);
+        console.log("gender", gender);
+      }
+      if (paymentMethod !== "") {
+        filtered = filtered.filter(
+          (persons) =>
+            persons.PaymentMethod === paymentMethod.toLocaleLowerCase()
+        );
+      }
+      setList(filtered);
+      return ()=> {
+        setList(current)
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+
   // console.log(list);
   if (!list) {
     return (

@@ -7,8 +7,8 @@ const Header = (props) => {
       <div className="item">
         <h2>{props.oneProp}</h2>
       </div>
-      {console.log(props.list)}
-      {console.log(props.oneProp)}
+      {/* {console.log(props.list)}
+      {console.log(props.oneProp)} */}
       <div className="right menu">
         <div className="item">
           <div className="ui icon input">
@@ -28,6 +28,7 @@ const Header = (props) => {
           <select
             name="category"
             onChange={(e) => props.handleFilterChange(e, "gender")}
+            id = "select"
           >
             <option value="default" defaultValue>Gender</option>
             <option value="male">Male</option>
@@ -37,6 +38,7 @@ const Header = (props) => {
           <select
             name="category"
             onChange={(e) => props.handleFilterChange(e, "paymentMethod")}
+            id="select"
           >
             <option value="default" defaultValue>Payment Method</option>
             <option value="cc">CC</option>
