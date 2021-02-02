@@ -23,21 +23,21 @@ function App() {
     searchState(event.target.value);
   }
   const [gender, setGender] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
+  // const [paymentMethod, setPaymentMethod] = useState("");
   // const [persons, setPersons] = useState(current);
 
-  const handleFilterChange = (e, filterType) => {
-    switch (filterType) {
-      case "gender":
-        setGender(e.target.value);
-        break;
-      case "paymentMethod":
-        setPaymentMethod(e.target.value);
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleFilterChange = (e, filterType) => {
+  //   switch (filterType) {
+  //     case "gender":
+  //       setGender(e.target.value);
+  //       break;
+  //     case "paymentMethod":
+  //       setPaymentMethod(e.target.value);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 //load data
   useEffect(() => {
     let mounted = true;
@@ -55,28 +55,28 @@ function App() {
   }, []);
 
 //filter
-    useEffect(() => {
-      let filtered = current;
-      console.log("first filtered", filtered);
-      if (gender !== "") {
-        filtered = filtered.filter(
-          (persons) => persons.Gender === gender.toLocaleLowerCase()
-        );
-        console.log("filtered", filtered);
-        console.log("gender", gender);
-      }
-      if (paymentMethod !== "") {
-        filtered = filtered.filter(
-          (persons) =>
-            persons.PaymentMethod === paymentMethod.toLocaleLowerCase()
-        );
-      }
-      setList(filtered);
-      return ()=> {
-        setList(current)
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //   let filtered = current;
+    //   console.log("first filtered", filtered);
+    //   if (gender !== "") {
+    //     filtered = filtered.filter(
+    //       (persons) => persons.Gender === gender.toLocaleLowerCase()
+    //     );
+    //     console.log("filtered", filtered);
+    //     console.log("gender", gender);
+    //   }
+    //   if (paymentMethod !== "") {
+    //     filtered = filtered.filter(
+    //       (persons) =>
+    //         persons.PaymentMethod === paymentMethod.toLocaleLowerCase()
+    //     );
+    //   }
+    //   setList(filtered);
+    //   return ()=> {
+    //     setList(current)
+    //   }
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
 
   // console.log(list);
@@ -98,9 +98,10 @@ function App() {
               oneProp,
               searchSpace,
               search,
-              handleFilterChange,
-              gender,
-              paymentMethod,
+              setGender
+              // handleFilterChange,
+              // gender,
+              // paymentMethod,
             })}
           </div>
           <div className="before-list">

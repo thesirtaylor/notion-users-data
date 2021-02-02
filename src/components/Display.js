@@ -14,15 +14,19 @@ const Display = (props) => {
         <div className="card">
           <div className="ui">
             <div className="header">
-              {person.FirstName + " " + person.LastName}
+              Name: {person.FirstName + " " + person.LastName}
+              <div className="meta"> Username: {person.UserName}</div>
             </div>
-            <div className="header">{person.Email}</div>
-            <div className="header">{person.PhoneNumber}</div>
-            <div className="meta">{person.Gender}</div>
-            <div className="meta">{person.URL}</div>
+            <div className="header">Email: {person.Email}</div>
+            <div className="header">Phone number: {person.PhoneNumber}</div>
+            <div className="meta">Gender: {person.Gender}</div>
+            <div className="meta">Url: {person.URL}</div>
             <div className="meta">
-              {person.Longitude + "," + person.Latitude}
+              Location: {person.Longitude + ", " + person.Latitude}
             </div>
+            <div className="meta">Credit Card: {person.CreditCardType}</div>
+            <div className="meta">Payment method{person.PaymentMethod}</div>
+            <div className="meta">Last Login: {person.LastLogin}</div>
           </div>
         </div>
       </div>

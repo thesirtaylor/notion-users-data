@@ -27,7 +27,7 @@ const Header = (props) => {
           <label >Filter</label>
           <select
             name="category"
-            onChange={(e) => props.handleFilterChange(e, "gender")}
+            onChange={(e) => props.setGender(e.target.value)}
             id = "select"
           >
             <option value="default" defaultValue>Gender</option>
@@ -37,7 +37,7 @@ const Header = (props) => {
           </select>
           <select
             name="category"
-            onChange={(e) => props.handleFilterChange(e, "paymentMethod")}
+            onChange={(e) => props.setGender(e.target.value)}
             id="select"
           >
             <option value="default" defaultValue>Payment Method</option>
