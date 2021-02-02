@@ -20,12 +20,12 @@ const Display = (props) => {
             <div className="header">Email: {person.Email}</div>
             <div className="header">Phone number: {person.PhoneNumber}</div>
             <div className="meta">Gender: {person.Gender}</div>
-            <div className="meta">Url: {person.URL}</div>
+            <div className="meta">Domain Name: {person.URL}</div>
             <div className="meta">
               Location: {person.Longitude + ", " + person.Latitude}
             </div>
             <div className="meta">Credit Card: {person.CreditCardType}</div>
-            <div className="meta">Payment method{person.PaymentMethod}</div>
+            <div className="meta">Payment method: {person.PaymentMethod}</div>
             <div className="meta">Last Login: {person.LastLogin}</div>
           </div>
         </div>

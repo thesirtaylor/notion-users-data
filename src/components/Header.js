@@ -23,24 +23,26 @@ const Header = (props) => {
         </div>
       </div>
       <div>
-        <form className="form">
-          <label >Filter</label>
+        <form className="form" name="forma">
+          <label>Filter</label>
           <select
             name="category"
-            onChange={(e) => props.setGender(e.target.value)}
-            id = "select"
+            onChange={(e) => props.filterGenderState(e.target.value)}
           >
-            <option value="default" defaultValue>Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="" defaultValue>
+              Gender
+            </option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
             <option value="Prefer to skip">ignore</option>
           </select>
           <select
             name="category"
-            onChange={(e) => props.setGender(e.target.value)}
-            id="select"
+            onChange={(e) => props.filterMethodState(e.target.value)}
           >
-            <option value="default" defaultValue>Payment Method</option>
+            <option value="" defaultValue>
+              Payment Method
+            </option>
             <option value="cc">CC</option>
             <option value="money order">Money order</option>
             <option value="paypal">Paypal</option>

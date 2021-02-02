@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { data } from "./services/enyetech";
 import "./App.css";
 import Display from "./components/Display";
@@ -9,6 +8,8 @@ import Pagination from "react-js-pagination";
 function App() {
   const [list, setList] = useState([]);
   const [search, searchState] = useState("");
+  const [filterGender, filterGenderState] = useState("");
+  const [filterMethod, filterMethodState] = useState("");
   const perPage = 20;
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLast = currentPage * perPage;
@@ -22,23 +23,10 @@ function App() {
     event.preventDefault();
     searchState(event.target.value);
   }
-  const [gender, setGender] = useState("");
-  // const [paymentMethod, setPaymentMethod] = useState("");
-  // const [persons, setPersons] = useState(current);
-
-  // const handleFilterChange = (e, filterType) => {
-  //   switch (filterType) {
-  //     case "gender":
-  //       setGender(e.target.value);
-  //       break;
-  //     case "paymentMethod":
-  //       setPaymentMethod(e.target.value);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-//load data
+  useEffect(() => {
+    setList(current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => {
     let mounted = true;
     data()
@@ -54,32 +42,6 @@ function App() {
     return () => (mounted = false);
   }, []);
 
-//filter
-    // useEffect(() => {
-    //   let filtered = current;
-    //   console.log("first filtered", filtered);
-    //   if (gender !== "") {
-    //     filtered = filtered.filter(
-    //       (persons) => persons.Gender === gender.toLocaleLowerCase()
-    //     );
-    //     console.log("filtered", filtered);
-    //     console.log("gender", gender);
-    //   }
-    //   if (paymentMethod !== "") {
-    //     filtered = filtered.filter(
-    //       (persons) =>
-    //         persons.PaymentMethod === paymentMethod.toLocaleLowerCase()
-    //     );
-    //   }
-    //   setList(filtered);
-    //   return ()=> {
-    //     setList(current)
-    //   }
-    //   // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
-
-  // console.log(list);
   if (!list) {
     return (
       <div>
@@ -90,7 +52,31 @@ function App() {
       </div>
     );
   } else {
+    let filtereditems;
     if (search === "") {
+      console.log("what gender", filterGender);
+
+      function fil(item) {
+        if (
+          (item.Gender.toString() === filterGender.toString() ||
+          item.PaymentMethod.toString() === filterMethod.toString()) ||
+          (item.Gender.toString() === filterGender.toString() &&
+            item.PaymentMethod.toString() === filterMethod.toString())
+        ) {
+          return true;
+        }
+      }
+      // eslint-disable-next-line array-callback-return
+      filtereditems =
+        (filterGender === "" && filterMethod === ""
+          ? current
+          : current.filter(fil)) ||
+        (filterGender !== "" && filterMethod === ""
+          ? current.filter(fil)
+          : current) ||
+        (filterMethod !== "" && filterGender === ""
+          ? current.filter(fil)
+          : current);
       return (
         <div>
           <div>
@@ -98,10 +84,10 @@ function App() {
               oneProp,
               searchSpace,
               search,
-              setGender
-              // handleFilterChange,
-              // gender,
-              // paymentMethod,
+              filterGender,
+              filterGenderState,
+              filterMethod,
+              filterMethodState,
             })}
           </div>
           <div className="before-list">
@@ -116,7 +102,7 @@ function App() {
             />
           </div>
           <div className="ui centered grid container">
-            <Display list={current} />
+            <Display list={filtereditems} />
           </div>
         </div>
       );
