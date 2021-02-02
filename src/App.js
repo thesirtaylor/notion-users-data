@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useEffect, useState } from "react";
 import { data } from "./services/enyetech";
 import "./App.css";
@@ -21,6 +22,42 @@ function App() {
     event.preventDefault();
     searchState(event.target.value);
   }
+  const [gender, setGender] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  // const [persons, setPersons] = useState(current);
+
+  const handleFilterChange = (e, filterType) => {
+    switch (filterType) {
+      case "gender":
+        setGender(e.target.value);
+        break;
+      case "paymentMethod":
+        setPaymentMethod(e.target.value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    let filtered = current;
+    console.log("first filtered", filtered);
+    if (gender !== "") {
+      filtered = filtered.filter(
+        (persons) => persons.Gender === gender.toLocaleLowerCase()
+      );
+      console.log("filtered", filtered);
+      console.log("gender", gender);
+    }
+    if (paymentMethod !== "") {
+      filtered = filtered.filter(
+        (persons) => persons.PaymentMethod === paymentMethod.toLocaleLowerCase()
+      );
+    }
+    setList(filtered);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[gender, paymentMethod]);
+
   useEffect(() => {
     let mounted = true;
     data()
@@ -35,7 +72,7 @@ function App() {
       }); //rewrite for better display
     return () => (mounted = false);
   }, []);
-
+  // console.log(list);
   if (!list) {
     return (
       <div>
@@ -49,7 +86,16 @@ function App() {
     if (search === "") {
       return (
         <div>
-          <div>{header({ oneProp, searchSpace, search })}</div>
+          <div>
+            {header({
+              oneProp,
+              searchSpace,
+              search,
+              handleFilterChange,
+              gender,
+              paymentMethod,
+            })}
+          </div>
           <div className="before-list">
             <Pagination
               className="item"

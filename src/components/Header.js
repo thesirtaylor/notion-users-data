@@ -22,7 +22,30 @@ const Header = (props) => {
           </div>
         </div>
       </div>
-
+      <div>
+        <form className="form">
+          <label >Filter</label>
+          <select
+            name="category"
+            onChange={(e) => props.handleFilterChange(e, "gender")}
+          >
+            <option value="default" defaultValue>Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="Prefer to skip">ignore</option>
+          </select>
+          <select
+            name="category"
+            onChange={(e) => props.handleFilterChange(e, "paymentMethod")}
+          >
+            <option value="default" defaultValue>Payment Method</option>
+            <option value="cc">CC</option>
+            <option value="money order">Money order</option>
+            <option value="paypal">Paypal</option>
+            <option value="check">Check</option>
+          </select>
+        </form>
+      </div>
     </div>
   );
 };
