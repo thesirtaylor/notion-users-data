@@ -7,8 +7,8 @@ const Header = (props) => {
       <div className="item">
         <h2>{props.oneProp}</h2>
       </div>
-      {console.log(props.list)}
-      {console.log(props.oneProp)}
+      {/* {console.log(props.list)}
+      {console.log(props.oneProp)} */}
       <div className="right menu">
         <div className="item">
           <div className="ui icon input">
@@ -22,7 +22,34 @@ const Header = (props) => {
           </div>
         </div>
       </div>
-
+      <div>
+        <form className="form" name="forma">
+          <label>Filter</label>
+          <select
+            name="category"
+            onChange={(e) => props.filterGenderState(e.target.value)}
+          >
+            <option value="" defaultValue>
+              Gender
+            </option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Prefer to skip">ignore</option>
+          </select>
+          <select
+            name="category"
+            onChange={(e) => props.filterMethodState(e.target.value)}
+          >
+            <option value="" defaultValue>
+              Payment Method
+            </option>
+            <option value="cc">CC</option>
+            <option value="money order">Money order</option>
+            <option value="paypal">Paypal</option>
+            <option value="check">Check</option>
+          </select>
+        </form>
+      </div>
     </div>
   );
 };
